@@ -9,7 +9,6 @@ export default {
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
   <Indecision />
 </template>
 
@@ -21,5 +20,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+body {
+  background: #010001;
 }
 </style>

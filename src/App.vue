@@ -20,8 +20,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-body {
-  background: #010001;
+  margin: auto;
+  position: relative;
+  top: 250px;
+  max-inline-size: 1290px;
+  padding-inline-start: 1rem;
+  padding-inline-end: 1rem;
 }
 </style>

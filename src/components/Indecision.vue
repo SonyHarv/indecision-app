@@ -64,11 +64,26 @@ input {
   padding-inline-start: 1rem;
   padding-inline-end: 1rem;
   outline: none;
+  box-sizing: border-box;
+  resize: vertical;
 }
 input[type="text"]:focus {
   border: 2px solid #0086df;
 }
 .questionWatch p {
   color: white;
+}
+img {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+@media screen and (max-width: 496px) {
+  input {
+    width: 100%;
+  }
 }
 </style>

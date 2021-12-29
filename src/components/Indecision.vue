@@ -1,15 +1,17 @@
 <template>
+  <img v-if="img" :src="img" alt="IndecisionApp Images" />
   <div class="question">
     <input
       type="text"
       title="Introduce tu duda"
-      placeholder="Ella me ama?"
+      placeholder="Hazme una pregunta?"
       v-model="question"
     />
     <h2>Recuerda terminar con un signo de interrogación(?)</h2>
   </div>
-  <div class="questionWatch">
+  <div class="questionWatch" v-if="isValidation">
     <p>{{ question }}</p>
+    <p>{{ answer }}</p>
   </div>
 </template>
 <script>
@@ -19,21 +21,36 @@ export default {
   data() {
     return {
       question: null,
+      answer: null,
+      img: null,
+      isValidation: false,
     };
+  },
+  methods: {
+    async getAnswer() {
+      this.answer = "Pensando...";
+      const { answer, image } = await fetch("https://yesno.wtf/api").then(
+        (resp) => resp.json()
+      );
+
+      this.answer = answer === "yes" ? "Si!" : "No!";
+      console.log(answer);
+      this.img = image;
+    },
   },
   watch: {
     question(value, oldValue) {
-      // console.log({ value, oldValue });
-      if (!value.includes("?")) {
+      this.isValidation = false;
+      if (value.includes("?")) {
+        this.isValidation = true;
         console.log("entro aqui");
-      } else {
-        console.log("Hola");
+        return this.getAnswer();
       }
     },
   },
 };
 </script>
-<style>
+<style scoped>
 h2 {
   color: #f0eff0;
   font-size: 1.2rem;
@@ -41,7 +58,6 @@ h2 {
 input {
   border: none;
   border-radius: 5px;
-  /* block-size: 1.5rem; */
   inline-size: 350px;
   padding-block-start: 13px;
   padding-block-end: 13px;
